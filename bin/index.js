@@ -82,11 +82,20 @@ program
 						);
 						packegesNotPermissive.forEach((p) => {
 							console.log(chalk.white(`------`));
-							console.log(chalk.yellow(`${p.packageName}`));
+							console.log(chalk.yellow(`Name: ${p.packageName}`));
 							console.log(
-								chalk.yellow(`${p.packageInfo.licenses}`)
+								chalk.yellow(
+									`Licenses: ${p.packageInfo.licenses}`
+								)
 							);
-							console.log(chalk.yellow(`${p.packageInfo.path}`));
+							console.log(
+								chalk.yellow(`Path: ${p.packageInfo.path}`)
+							);
+							console.log(
+								chalk.yellow(
+									`Repository ${p.packageInfo.repository}`
+								)
+							);
 						});
 					}
 				}
