@@ -1,6 +1,6 @@
 {
 	"name": "@opi_pib/node-licenses",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"main": "bin/index.js",
 	"bin": {
 		"licenses": "./bin/index.js"
@@ -18,5 +18,9 @@
 		"chalk": "^5.3.0",
 		"commander": "^12.1.0",
 		"license-checker-rseidelsohn": "^4.3.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/OPI-PIB/node-licenses.git"
 	}
 }
