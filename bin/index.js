@@ -1,5 +1,7 @@
 #! /usr/bin/env node
 
+// @ts-check
+
 const { program } = require('commander');
 const checker = require('license-checker-rseidelsohn');
 
@@ -33,14 +35,20 @@ const permissive = [
 program
 	.command('list')
 	.description('List all licenses in project')
-	.action((options) => {
+	.option('-p, --production', 'Only show production dependencies', false)
+	.option('-n, --nopeer', 'Ignore peerDependencies', false)
+	.option('-d, --direct', 'Look for direct dependencies only', false)
+	.action(({ production, nopeer, direct }) => {
 		checker.init(
 			{
 				start: './',
+				production,
+				nopeer,
+				direct,
 			},
 			async function (err, packages) {
 				if (err) {
-					console.err(err);
+					console.error(err);
 				} else {
 					const chalk = (await import('chalk')).default;
 					const licensesPermissive = {};
@@ -51,7 +59,10 @@ program
 					)) {
 						const license = packageInfo.licenses;
 
-						if (permissive.includes(license)) {
+						if (
+							typeof license === 'string' &&
+							permissive.includes(license)
+						) {
 							if (licensesPermissive[license]) {
 								licensesPermissive[license] += 1;
 							} else {
