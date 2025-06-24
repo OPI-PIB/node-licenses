@@ -1,6 +1,6 @@
 {
 	"name": "@opi_pib/node-licenses",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"main": "bin/index.js",
 	"bin": {
 		"licenses": "./bin/index.js"
@@ -16,7 +16,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"chalk": "^5.0.0",
-		"commander": "^12.0.0",
+		"commander": "^14.0.0",
 		"license-checker-rseidelsohn": "^4.0.0"
 	},
 	"repository": {
