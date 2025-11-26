@@ -29,7 +29,7 @@ const permissive = [
 
 	// Other
 	'Unlicense',
-	'WTFPL',
+	'WTFPL'
 ];
 
 program
@@ -44,69 +44,47 @@ program
 				start: './',
 				production,
 				nopeer,
-				direct,
+				direct
 			},
-			async function (err, packages) {
+			function (err, packages) {
 				if (err) {
 					console.error(err);
 				} else {
-					const chalk = (await import('chalk')).default;
-					const licensesPermissive = {};
-					const packegesNotPermissive = [];
+					const licensesPermissive = /** @type {{[key: string]: number}} */ ({});
+					const packagesNotPermissive = [];
 
-					for (const [packageName, packageInfo] of Object.entries(
-						packages
-					)) {
+					for (const [packageName, packageInfo] of Object.entries(packages)) {
 						const license = packageInfo.licenses;
 
-						if (
-							typeof license === 'string' &&
-							permissive.includes(license)
-						) {
+						if (typeof license === 'string' && permissive.includes(license)) {
 							if (licensesPermissive[license]) {
 								licensesPermissive[license] += 1;
 							} else {
 								licensesPermissive[license] = 1;
 							}
 						} else {
-							packegesNotPermissive.push({
+							packagesNotPermissive.push({
 								packageName,
-								packageInfo,
+								packageInfo
 							});
 						}
 					}
 
-					console.log(chalk.green(`Licenses permissive:`));
-					console.log(chalk.white(`------`));
-					for (const [license, count] of Object.entries(
-						licensesPermissive
-					)) {
-						console.log(chalk.green(`${license}: ${count}`));
+					console.log(`✅ Licenses permissive:`);
+					console.log(`------`);
+					for (const [license, count] of Object.entries(licensesPermissive)) {
+						console.log(`✅ ${license}: ${count}`);
 					}
 
-					if (packegesNotPermissive.length) {
-						console.log(chalk.white(`------`));
-						console.log(
-							chalk.yellow(
-								`Packages with not permissive licenses:`
-							)
-						);
-						packegesNotPermissive.forEach((p) => {
-							console.log(chalk.white(`------`));
-							console.log(chalk.yellow(`Name: ${p.packageName}`));
-							console.log(
-								chalk.yellow(
-									`Licenses: ${p.packageInfo.licenses}`
-								)
-							);
-							console.log(
-								chalk.yellow(`Path: ${p.packageInfo.path}`)
-							);
-							console.log(
-								chalk.yellow(
-									`Repository ${p.packageInfo.repository}`
-								)
-							);
+					if (packagesNotPermissive.length) {
+						console.log(`------`);
+						console.log(`⚠️  Packages with not permissive licenses:`);
+						packagesNotPermissive.forEach((p) => {
+							console.log(`------`);
+							console.log(`⚠️  Name: ${p.packageName}`);
+							console.log(`⚠️  Licenses: ${p.packageInfo.licenses}`);
+							console.log(`⚠️  Path: ${p.packageInfo.path}`);
+							console.log(`⚠️  Repository ${p.packageInfo.repository}`);
 						});
 					}
 				}

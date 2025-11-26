@@ -1,6 +1,6 @@
 {
 	"name": "@opi_pib/node-licenses",
-	"version": "1.0.5",
+	"version": "1.0.7",
 	"main": "bin/index.js",
 	"bin": {
 		"licenses": "./bin/index.js"
@@ -14,10 +14,24 @@
 	],
 	"author": "Dawid Lubowiecki",
 	"license": "MIT",
+	"engines": {
+		"node": ">=24.0.0",
+		"npm": ">=10.8.0"
+	},
+	"lint-staged": {
+		"*.{js,mjs}": "eslint --fix",
+		"*": "prettier -u -w"
+	},
+	"prettier": "@opi_pib/prettier-config-base",
 	"dependencies": {
-		"chalk": "^5.0.0",
 		"commander": "^14.0.0",
 		"license-checker-rseidelsohn": "^4.0.0"
+	},
+	"devDependencies": {
+		"@opi_pib/eslint-config-base": "^9.0.0",
+		"@opi_pib/prettier-config-base": "^1.0.0",
+		"husky": "^9.0.0",
+		"lint-staged": "^16.0.0"
 	},
 	"repository": {
 		"type": "git",
