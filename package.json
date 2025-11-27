@@ -1,11 +1,13 @@
 {
 	"name": "@opi_pib/node-licenses",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"main": "bin/index.js",
 	"bin": {
 		"licenses": "./bin/index.js"
 	},
-	"scripts": {},
+	"scripts": {
+		"prepare": "husky"
+	},
 	"description": "License checker",
 	"keywords": [
 		"cli",
