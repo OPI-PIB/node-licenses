@@ -12,6 +12,12 @@ npm install -g @opi_pib/node-licenses
 licenses list
 ```
 
+or
+
+```
+npx @opi_pib/node-licenses list
+```
+
 ### Only show production dependencies
 
 ```
